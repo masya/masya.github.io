@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<div class="home">
+  <header class="post-header">
+	  <h1 class="post-title" style="color: {{ page.color }};">{{ page.title | escape }}</h1>
+  </header>
+  <div class="post-content">
+  {{ content }}
+  </div>
+  {% assign category = page.category|downcase %}
+    <ul class="post-list">
+      {% for post in site.posts %}
+      {% if post.categories contains category  %}
+      <li>
+	<span class="post-meta">{% include date.html date=post.date %}</span>
+        <h3 style="margin-bottom: 0px">
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+	<h4>
+            {{ post.anons | escape }}
+	</h4>
+        {% if site.show_excerpts %}
+          {{ post.excerpt }}
+        {% endif %}
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+
+</div>

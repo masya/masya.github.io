@@ -15,7 +15,7 @@ anons: "Подготовка десктопа на Windows 10"
 
 - Запустите PowerShell с правами администратора
 
-{% highlight ruby %}
+{% highlight shell %}
 PS > Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 {% endhighlight %}
 
@@ -23,7 +23,7 @@ PS > Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsys
 
 - Запустите Ubuntu Bash
 
-{% highlight ruby %}
+{% highlight shell %}
 # обновить репозиторий и пакеты
 sudo apt-get update -y && sudo apt-get upgrade -y
 # для установки Ruby будем использовать репозиторий BrightBox

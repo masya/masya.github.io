@@ -16,7 +16,7 @@ author: mAsYA
 
 Дополнительно: языки программирования Perl, Python, Tcl для использования PL/Perl, PL/Python, PL/Tcl; Kerberos, OpenSSL, OpenLDAP, PAM для аутентификации и шифрования
 
-{% highlight ruby %}
+{% highlight shell %}
 # OS - Ubuntu
 sudo apt-get install gcc make flex bison libreadline-dev zlib1g-dev libxml2-utils libsystemd-dev libossp-uuid-dev
 sudo apt-get install docbook docbook-dsssl docbook-xsl opensp xsltproc
@@ -24,7 +24,7 @@ sudo apt-get install docbook docbook-dsssl docbook-xsl opensp xsltproc
 
 <b>2) Скачиваем и распаковываем архив</b> 
 
-{% highlight ruby %}
+{% highlight shell %}
 sudo su - postgres
 # скачать архив с исходниками
 sudo wget https://ftp.postgresql.org/pub/source/v12.3/postgresql-12.3.tar.gz
@@ -47,7 +47,7 @@ tar xzf /usr/src/postgresql-12.3.tar.gz
 
 --with-systemd - поддержка служебных уведомлений для systemd;
 
-{% highlight ruby %}
+{% highlight shell %}
 cd /usr/src/postgresql-12.3/
 # конфигурирование, сборка, установка 
 ./configure --with-systemd --bindir=/usr/bin --sbindir=/usr/sbin --prefix=/var/lib/pgsql/ --with-ossp-uuid
@@ -55,19 +55,19 @@ cd /usr/src/postgresql-12.3/
 
 <b>4) Сборка PostgreSQL</b>
 
-{% highlight ruby %}
+{% highlight shell %}
 make -C /usr/src/postgresql-12.3/
 {% endhighlight %}
 
 <b>5) Установка PostgreSQL</b>
 
-{% highlight ruby %}
+{% highlight shell %}
 sudo make -C /usr/src/postgresql-12.3 install
 {% endhighlight %}   
 
 <b>6) Инициализация и запуск кластера</b>
 
-{% highlight ruby %}
+{% highlight shell %}
 # инициализация кластера
 initdb -D /var/lib/pgsql/data/ -k
 # старт СУБД
@@ -76,7 +76,7 @@ pg_ctl -w -D /var/lib/pgsql/data/ -l /var/log/postgres/logfile start
 
 <b>7) Установка расширений</b>
 
-{% highlight ruby %}
+{% highlight shell %}
 cd /usr/src/postgresql-12.3/contrib/pg_stat_statements/
 make
 sudo make install

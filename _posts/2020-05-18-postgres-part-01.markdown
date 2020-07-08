@@ -25,13 +25,13 @@ sudo apt-get install docbook docbook-dsssl docbook-xsl opensp xsltproc
 <b>2) Скачиваем и распаковываем архив</b> 
 
 {% highlight shell %}
-sudo su - postgres
 # скачать архив с исходниками
 sudo wget https://ftp.postgresql.org/pub/source/v12.3/postgresql-12.3.tar.gz
 # создать папку для исходников
 sudo mkdir /usr/src/postgresql-12.3
 sudo chmod -R 777 /usr/src/postgresql-12.3
 sudo chown postgres:postgres /usr/src/postgresql-12.3/
+sudo su - postgres
 cd /usr/src/
 # распаковать архив
 tar xzf /usr/src/postgresql-12.3.tar.gz

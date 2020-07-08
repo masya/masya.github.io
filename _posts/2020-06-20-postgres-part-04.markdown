@@ -28,6 +28,7 @@ sudo make install
 db = host=127.0.0.1 port=5432 dbname=postgres auth_user=www
 [pgbouncer]
 logfile = /var/log/pgbouncer/pgbouncer.log
+auth_query = SELECT uname, phash FROM user_lookup($1)
 listen_addr = *
 listen_port = 6432
 auth_type = md5
@@ -41,7 +42,16 @@ pool_mode = transaction
 {% highlight sql %}
 CREATE USER www WITH PASSWORD '12345';
 GRANT CONNECT ON DATABASE postgres TO www;
-GRANT SELECT ON pg_shadow TO www;
+CREATE OR REPLACE FUNCTION user_lookup(in i_username text, out uname text, out phash text)
+RETURNS record AS $$
+BEGIN
+    SELECT usename, passwd FROM pg_catalog.pg_shadow
+    WHERE usename = i_username INTO uname, phash;
+    RETURN;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+REVOKE ALL ON FUNCTION user_lookup(text) FROM public, postgres;
+GRANT EXECUTE ON FUNCTION user_lookup(text) TO www;
 {% endhighlight %}
 
 4) Файл userlist.txt со списком пользователей, которым разрешено подключение

@@ -21,8 +21,8 @@ PG03|172.26.130.102|Backup
 - на бэкап-сервере
 
 {% highlight shell %}
-curl https://dl.2ndquadrant.com/default/release/get/deb | sudo bash
-apt-get install barman barman-cli
+sudo curl https://dl.2ndquadrant.com/default/release/get/deb | sudo bash
+sudo apt-get install barman barman-cli
 {% endhighlight %}
 
 <b>2) Настройка соединений по ssh</b>
@@ -212,7 +212,7 @@ barman check pg02
 - на бэкап-сервере
 
 {% highlight shell %}
-$ barman replication-status pg02
+barman replication-status pg02
 {% endhighlight shell %}
 
 Создание резервной копии:                                                                                                            
@@ -220,7 +220,7 @@ $ barman replication-status pg02
 - на бэкап-сервере
 
 {% highlight shell %}
-$ barman backup pg02
+barman backup pg02
 {% endhighlight shell %}
 
 <b>8) Восстановление из архивов standby</b>
